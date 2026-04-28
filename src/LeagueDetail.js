@@ -4,6 +4,7 @@ export default function LeagueDetails({ leagueId }) {
   const [leagueData, setLeagueData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
 
   useEffect(() => {
     const fetchLeagueDetails = async () => {

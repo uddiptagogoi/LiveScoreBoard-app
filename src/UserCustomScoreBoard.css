@@ -1,0 +1,220 @@
+.scoreboard-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-card-button {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  box-shadow: var(--card-shadow);
+}
+
+.add-card-button:hover { filter: brightness(0.95); }
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 0;
+  min-height: 200px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  /* top padding reduced now that time is shown inline below the score */
+  padding: 20px 16px 14px 16px;
+  /* flexible width: try to fit content, but stay within bounds */
+  width: auto;
+  min-width: 180px;
+  max-width: 460px;
+  flex: 0 1 220px; /* allow cards to shrink/grow in the row */
+  min-height: 80px;
+  box-shadow: var(--card-shadow);
+  cursor: move;
+  position: relative;
+  transition: transform 240ms ease, box-shadow 240ms ease, width 240ms ease;
+  transform-origin: center center;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+}
+
+.card.dragging {
+  z-index: 1000;
+  opacity: 0.95;
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.18);
+}
+
+.card.drag-over {
+  transform: translateX(10px);
+  border: 2px dashed var(--primary);
+  background-color: rgba(0,0,0,0.03);
+}
+
+.card-top { display:flex; align-items:center; gap:12px; flex-wrap:wrap }
+.live-badge { background:var(--primary); color:white; padding:4px 8px; border-radius:12px; font-weight:700; font-size:12px; animation: blink 1s infinite; }
+@keyframes blink { 0%{opacity:1}50%{opacity:0.2}100%{opacity:1} }
+.teams { display:flex; align-items:center; gap:8px; justify-content:space-between; width:100%; }
+.team-left, .team-right { font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:40%; }
+.score { font-size:18px; font-weight:800; white-space:nowrap; margin: 0 8px; flex: 0 0 auto }
+.score.long { font-size:14px; font-weight:700; word-break:break-word }
+.time { font-size:12px; color: rgba(0,0,0,0.6) }
+
+
+.card.expanded { flex: 0 1 460px; width: 100%; max-width: 720px; transform: scale(1.01); }
+.card-details { margin-top:12px; border-top:1px solid rgba(0,0,0,0.06); padding-top:10px }
+.card-details div { margin-bottom:6px }
+.generic-stats { background: rgba(0,0,0,0.02); padding:8px; border-radius:6px; font-size:13px }
+
+/* soft elliptical shadow under card to enhance 'floating' look */
+.card::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 80%;
+  height: 18px;
+  background: var(--shadow-color);
+  border-radius: 50%;
+  filter: blur(12px);
+  opacity: 1;
+  transition: opacity 240ms ease, transform 240ms ease;
+  pointer-events: none;
+}
+
+/* absolute live badge and time badge */
+.live-dot {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  z-index: 6;
+  display: inline-block;
+  animation: blink 1s infinite;
+  border: 2px solid var(--card-bg); /* small border so it sits on the card edge */
+}
+
+/* running time shown below the score line */
+.time-below {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(0,0,0,0.6);
+}
+
+/* cross (delete) button sits on the top-right boundary of the card */
+.delete-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 28px;
+  height: 28px;
+  /* make delete button visually distinct from the card: red background with white X */
+  background: #e74c3c;
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #ffffff; /* white X for contrast */
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 7;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.delete-button:hover { background: #c0392b; }
+
+/* ensure badges contrast on dark theme */
+body.theme-dark .time-below { color: rgba(255,255,255,0.75) }
+
+.card.dragging::after { opacity: 0.35; transform: translateX(-50%) scale(1.2); }
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+  font-size: 15px;
+  color: var(--text);
+}
+
+/* (delete button styled above as circular control) */
+
+/* Search modal styles */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.search-modal {
+  background: var(--card-bg);
+  color: var(--text);
+  width: 90%;
+  max-width: 540px;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+}
+
+.search-modal h3 {
+  margin-top: 0;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.08);
+  margin-bottom: 12px;
+  background: transparent;
+  color: var(--text);
+}
+
+.search-results { max-height: 260px; overflow:auto; }
+.match-item { padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.04); cursor: pointer; }
+.match-item:hover { background: rgba(0,0,0,0.03); }
+.match-title { font-weight: 600; }
+.match-meta { font-size: 13px; color: rgba(0,0,0,0.6) }
+.no-results { padding: 10px; color: rgba(0,0,0,0.6) }
+.close-search { margin-top: 12px; padding: 8px 12px; background: rgba(0,0,0,0.04); border: none; border-radius:6px; cursor:pointer }
+.close-search:hover { background: rgba(0,0,0,0.06) }
+
+/* Dark theme overrides for cards and modal */
+body.theme-dark .card { border-color: rgba(255,255,255,0.04); }
+body.theme-dark .search-input { border-color: rgba(255,255,255,0.06) }
+body.theme-dark .match-meta, body.theme-dark .no-results { color: rgba(255,255,255,0.7) }
+/* ensure delete button remains visible in dark theme */
+body.theme-dark .delete-button {
+  /* slightly brighter red on dark theme and keep white icon */
+  background: #ff6b6b;
+  border-color: rgba(255,255,255,0.06);
+  color: #ffffff;
+}

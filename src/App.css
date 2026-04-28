@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background: var(--bg);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--text);
 }
 
 .App-link {
@@ -36,3 +36,62 @@
     transform: rotate(360deg);
   }
 }
+
+/* Theme variables */
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --primary: #c62828; /* deep red */
+  --muted: #f5f5f5;
+  --card-bg: #fff;
+  --card-shadow: 0 10px 30px rgba(2,6,23,0.08), 0 4px 8px rgba(2,6,23,0.04);
+  --shadow-color: rgba(2,6,23,0.12);
+}
+
+body.theme-dark {
+  --bg: #0f1720;
+  --text: #e6eef6;
+  --primary: #ef5350; /* softer red for dark */
+  --muted: #0b1220;
+  --card-bg: #0b1220;
+  --card-shadow: 0 18px 40px rgba(0,0,0,0.6), 0 6px 12px rgba(0,0,0,0.45);
+  --shadow-color: rgba(0,0,0,0.5);
+}
+
+/* Apply base colors */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Navbar overrides to use theme colors */
+.navbar {
+  background: var(--card-bg);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.navbar .navbar-brand { color: var(--primary); font-weight:700 }
+.navbar .nav-link { color: var(--text); margin-left:8px }
+.navbar .nav-link.active { color: var(--primary); font-weight:600 }
+
+.theme-toggle {
+  background: linear-gradient(180deg, var(--muted), transparent);
+  border: 1px solid rgba(0,0,0,0.06);
+  color: var(--text);
+  padding: 6px 8px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.theme-toggle svg { display:block }
+
+/* Light theme tweaks to emphasize red/white look */
+body.theme-light .App-header { background: #fff; color: #111 }
+body.theme-light .navbar { background: #fff }
+body.theme-light .card { background: #fff }
+
+/* Dark theme tweaks */
+body.theme-dark .navbar { background: #071021 }
+body.theme-dark .navbar .nav-link { color: #cbd5e1 }
+body.theme-dark .navbar .navbar-brand { color: var(--primary) }

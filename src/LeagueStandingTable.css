@@ -1,0 +1,23 @@
+.league-standing-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+}
+
+.league-standing-table table {
+  width: 100%;
+  border-radius: 12px;
+  border-color: black;
+}
+
+/* .league-standing-table tr {
+  border-color: black;
+  border-width: 1px;
+} */
+
+.league-standing-table tr.narrow {
+  width: 1px;
+  white-space: nowrap;
+}

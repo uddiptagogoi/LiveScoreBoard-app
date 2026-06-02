@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './LeagueDetail.css';
 
 export default function LeagueDetails({ leagueId }) { 
   const [leagueData, setLeagueData] = useState(null);
@@ -9,26 +10,17 @@ export default function LeagueDetails({ leagueId }) {
     const fetchLeagueDetails = async () => {
       try {
         setLoading(true);
+
         const response = await fetch(
-          `https://www.thesportsdb.com/api/v1/json/123/lookupleague.php?id=${leagueId || 4328}`
+            `http://localhost:8080/mynewapp/league-details/${leagueId || 4328}`
         );
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
+
         const data = await response.json();
-        
-        if (data.leagues && data.leagues.length > 0) {
-          setLeagueData(data.leagues[0]);
-        } else {
-          throw new Error("No league data found");
-        }
+          setLeagueData(data);
         
         setError(null);
       } catch (err) {
         setError(err.message);
-        console.error("Error fetching league details:", err);
       } finally {
         setLoading(false);
       }
@@ -231,215 +223,6 @@ export default function LeagueDetails({ leagueId }) {
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        .league-details {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-          font-family: Arial, sans-serif;
-        }
-
-        .loading, .error, .no-data {
-          text-align: center;
-          padding: 40px;
-          font-size: 18px;
-          color: #666;
-        }
-
-        .error {
-          color: #d32f2f;
-        }
-
-        .league-header {
-          margin-bottom: 30px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .league-basic-info {
-          display: flex;
-          align-items: center;
-          padding: 30px;
-          gap: 30px;
-        }
-
-        .league-badge {
-          width: 120px;
-          height: 120px;
-          object-fit: contain;
-          background: white;
-          padding: 10px;
-          border-radius: 10px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .league-basic-info h2 {
-          margin: 0 0 10px 0;
-          font-size: 2.5em;
-        }
-
-        .league-alternate {
-          margin: 0 0 20px 0;
-          font-size: 1.2em;
-          opacity: 0.9;
-        }
-
-        .league-meta {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 20px;
-          margin-top: 15px;
-        }
-
-        .meta-item {
-          background: rgba(255, 255, 255, 0.1);
-          padding: 8px 16px;
-          border-radius: 20px;
-          font-size: 0.9em;
-        }
-
-        .league-banner {
-          width: 100%;
-          max-height: 300px;
-          object-fit: cover;
-          display: block;
-        }
-
-        .league-content {
-          padding: 20px 0;
-        }
-
-        .league-description {
-          margin-bottom: 30px;
-          line-height: 1.6;
-        }
-
-        .league-description h3 {
-          color: #333;
-          border-bottom: 2px solid #667eea;
-          padding-bottom: 10px;
-          margin-bottom: 15px;
-        }
-
-        .league-details-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
-          margin-bottom: 30px;
-        }
-
-        .league-website h3,
-        .tv-rights h3,
-        .league-media h3 {
-          color: #333;
-          border-bottom: 2px solid #764ba2;
-          padding-bottom: 10px;
-          margin-bottom: 15px;
-        }
-
-        .league-website p {
-          margin: 10px 0;
-        }
-
-        .league-website a {
-          color: #667eea;
-          text-decoration: none;
-        }
-
-        .league-website a:hover {
-          text-decoration: underline;
-        }
-
-        .tv-rights ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-
-        .tv-rights li {
-          padding: 8px 0;
-          border-bottom: 1px solid #eee;
-        }
-
-        .league-media .media-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-          gap: 20px;
-          margin-top: 15px;
-        }
-
-        .media-item {
-          text-align: center;
-        }
-
-        .media-item strong {
-          display: block;
-          margin-bottom: 10px;
-          color: #666;
-        }
-
-        .media-image {
-          width: 100%;
-          max-height: 150px;
-          object-fit: contain;
-          border-radius: 8px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .fanart-section {
-          margin-top: 40px;
-        }
-
-        .fanart-section h3 {
-          color: #333;
-          border-bottom: 2px solid #667eea;
-          padding-bottom: 10px;
-          margin-bottom: 20px;
-        }
-
-        .fanart-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 20px;
-        }
-
-        .fanart-image {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-          border-radius: 8px;
-          transition: transform 0.3s ease;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .fanart-image:hover {
-          transform: scale(1.05);
-        }
-
-        @media (max-width: 768px) {
-          .league-basic-info {
-            flex-direction: column;
-            text-align: center;
-            padding: 20px;
-          }
-
-          .league-meta {
-            justify-content: center;
-          }
-
-          .league-basic-info h2 {
-            font-size: 2em;
-          }
-
-          .league-details-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
     </div>
   );
 }

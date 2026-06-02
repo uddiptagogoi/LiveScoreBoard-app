@@ -16,12 +16,12 @@ function NavBar({ theme, toggleTheme }) {
                             <li className="nav-item">
                                 <Link className={`nav-link ${location.hash === '/userCustomScoreBoard' ? 'active' : ''}`} to="/userCustomScoreBoard">Featured</Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link className={`nav-link ${location.hash === '/MatcheInfo' ? 'active' : ''}`} to="/MatcheInfo">Popular</Link>
-                            </li>
-                            <li className="nav-item">
+                            </li> */}
+                            {/* <li className="nav-item">
                                 <Link className={`nav-link ${location.hash === '#latest' ? 'active' : ''}`} to="#latest">Latest</Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item">
                                 <Link className={`nav-link ${location.hash === '#contact' ? 'active' : ''}`} to="#contact">Contact</Link>
                             </li>

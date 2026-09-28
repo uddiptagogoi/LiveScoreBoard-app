@@ -62,14 +62,31 @@ function CardSection() {
     fetchLeagues();
   }, []);
 
-    
+      // Helper functions to populate league data
+ /* const getCountryFromLeagueName = (leagueName) => {
+    const countryMap = {
+      'English': 'England',
+      'Scottish': 'Scotland',
+      'German': 'Germany',
+      'Italian': 'Italy',
+      'French': 'France',
+      'Spanish': 'Spain',
+      'Greek': 'Greece',
+      'Dutch': 'Netherlands',
+      'Belgian': 'Belgium',
+      'Portuguese': 'Portugal',
+      'MLS': 'USA',
+      'Brazilian': 'Brazil',
+      'Argentinian': 'Argentina'
+    }; 
+
     for (const [key, value] of Object.entries(countryMap)) {
       if (leagueName.includes(key)) {
         return value;
       }
     }
     return 'International';
-  };
+  }; */
 
 /*  const getLeagueLogo = (idLeague, leagueName) => {
     // Using TheSportsDB's badge API

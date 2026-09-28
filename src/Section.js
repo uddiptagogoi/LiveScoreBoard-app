@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Section.css";
-import FamousFootballLeagues from "./FamousFootballLeagues";
 import LeagueStandingTable from "./LeagueStandingTable";
 import LeagueStatistics from "./LeagueStatistics";
 import LeagueDetails from "./LeagueDetail";
@@ -63,23 +62,6 @@ function CardSection() {
     fetchLeagues();
   }, []);
 
-  // Helper functions to populate league data
-  const getCountryFromLeagueName = (leagueName) => {
-    const countryMap = {
-      'English': 'England',
-      'Scottish': 'Scotland',
-      'German': 'Germany',
-      'Italian': 'Italy',
-      'French': 'France',
-      'Spanish': 'Spain',
-      'Greek': 'Greece',
-      'Dutch': 'Netherlands',
-      'Belgian': 'Belgium',
-      'Portuguese': 'Portugal',
-      'MLS': 'USA',
-      'Brazilian': 'Brazil',
-      'Argentinian': 'Argentina'
-    };
     
     for (const [key, value] of Object.entries(countryMap)) {
       if (leagueName.includes(key)) {
@@ -89,10 +71,10 @@ function CardSection() {
     return 'International';
   };
 
-  const getLeagueLogo = (idLeague, leagueName) => {
+/*  const getLeagueLogo = (idLeague, leagueName) => {
     // Using TheSportsDB's badge API
     return `https://www.thesportsdb.com/images/media/league/badge/${idLeague}.png`;
-  };
+  }; */
 
   const handleLeagueClick = (league) => {
     setSelectedLeagueId(league.internalId);
@@ -121,7 +103,7 @@ function CardSection() {
   };
 
   // Find the selected league object
-  const selectedLeague = leagues.find(league => league.internalId === selectedLeagueId);
+  //const selectedLeague = leagues.find(league => league.internalId === selectedLeagueId);
 
   return (
       <div className="home-page-container">

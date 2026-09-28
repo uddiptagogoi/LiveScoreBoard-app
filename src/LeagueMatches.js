@@ -3,7 +3,7 @@ import './LeagueMatches.css';
 import { format } from 'date-fns';
 
 export default function LeagueMatches({ leagueId }) {
-  const [matches, setMatches] = useState([]);
+  //const [matches, setMatches] = useState([]);
   const [groupedMatches, setGroupedMatches] = useState({});
   const [dates, setDates] = useState([]);
   const [currentDateIndex, setCurrentDateIndex] = useState(0);
@@ -121,7 +121,7 @@ export default function LeagueMatches({ leagueId }) {
   };
 
   // Format time for display
-  const formatDisplayTime = (timeString) => {
+  /*const formatDisplayTime = (timeString) => {
     try {
       const [hours, minutes] = timeString.split(':');
       const hour = parseInt(hours);
@@ -131,7 +131,7 @@ export default function LeagueMatches({ leagueId }) {
     } catch (err) {
       return timeString;
     }
-  };
+  };*/
 
   // Loading state
   if (loading) {

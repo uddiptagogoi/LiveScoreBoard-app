@@ -56,7 +56,7 @@ export default function LeagueMatches({ leagueId }) {
             timestamp: match.strTimestamp,
           }));
           
-          setMatches(transformedMatches);
+          //setMatches(transformedMatches);
           
           // Group matches by date
           const grouped = transformedMatches.reduce((acc, match) => {
@@ -78,14 +78,14 @@ export default function LeagueMatches({ leagueId }) {
           const todayIndex = uniqueDates.indexOf(today);
           setCurrentDateIndex(todayIndex !== -1 ? todayIndex : 0);
         } else {
-          setMatches([]);
+          //setMatches([]);
           setGroupedMatches({});
           setDates([]);
         }
       } catch (err) {
         console.error("Error fetching matches:", err);
         setError(err.message);
-        setMatches([]);
+        //setMatches([]);
         setGroupedMatches({});
         setDates([]);
       } finally {

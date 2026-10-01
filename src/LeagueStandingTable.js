@@ -26,7 +26,7 @@ function LeagueStandingTable({ selectedLeagueId }) {
         }
 
         const response = await fetch(
-          `http://localhost:8080/mynewapp/standings/${selectedLeagueId}`
+          `https://livescoreboard-api.onrender.com/mynewapp/standings/${selectedLeagueId}`
         );
         
         if (!response.ok) {

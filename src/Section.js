@@ -21,7 +21,7 @@ function CardSection() {
       
       try {
         const response = await fetch(
-          "http://localhost:8080/mynewapp/leagues"
+          "https://livescoreboard-api.onrender.com//mynewapp/leagues"
         );
         
         if (!response.ok) {
